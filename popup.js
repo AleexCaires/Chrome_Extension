@@ -12,7 +12,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Function to update button label based on blocking state
   function updateButtonLabel() {
-    toggleBlockingButton.textContent = isBlocking ? "Disable Script Blocking" : "Enable Script Blocking";
+    toggleBlockingButton.textContent = isBlocking
+      ? "Disable Script Blocking"
+      : "Enable Script Blocking";
   }
 
   // Toggle blocking state when the button is clicked
@@ -27,7 +29,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Send a message to content.js to apply the new blocking state
     chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-      chrome.tabs.sendMessage(tabs[0].id, { action: "toggleBlocking", isBlocking });
+      chrome.tabs.sendMessage(tabs[0].id, {
+        action: "toggleBlocking",
+        isBlocking,
+      });
     });
 
     // Update the button label
